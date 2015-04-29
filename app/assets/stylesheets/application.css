@@ -13,5 +13,6 @@
  *= require_self
  *= require jquery-ui
  *= require bootstrap
+ *= require lumen
  *= require custom
  */
