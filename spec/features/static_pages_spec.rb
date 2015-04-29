@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "Static Pages", type: :feature do
   
   subject { page }
-  
+
+   
   describe "Home page" do 
     
     describe "when not logged in" do
@@ -13,12 +14,40 @@ RSpec.describe "Static Pages", type: :feature do
       it { should have_content('Register') }
     end
     
-    describe "when logged in" do
+    describe "when logged in as user" do
       let(:user) { FactoryGirl.create(:user) }
+ 
       before do
         sign_in user
         visit root_path
       end
+      
+      it { should have_content('Sign Out, '+ user.firstname.capitalize) }
+      it { should_not have_content('Sign In') }
+      it { should have_title(full_title('Home')) }
+    end
+
+    describe "when logged in as superuser" do
+      let(:user) { FactoryGirl.create(:superuser) }
+ 
+      before do
+        sign_in user
+        visit root_path
+      end
+      
+      it { should have_content('Sign Out, '+ user.firstname.capitalize) }
+      it { should_not have_content('Sign In') }
+      it { should have_title(full_title('Home')) }
+    end
+
+    describe "when logged in as admin" do
+      let(:user) { FactoryGirl.create(:admin) }
+ 
+      before do
+        sign_in user
+        visit root_path
+      end
+      
       it { should have_content('Sign Out, '+ user.firstname.capitalize) }
       it { should_not have_content('Sign In') }
       it { should have_title(full_title('Home')) }
@@ -35,7 +64,7 @@ RSpec.describe "Static Pages", type: :feature do
       it { should have_content('Sign In') }
     end
     
-    describe "when logged in" do
+    describe "when logged in as user" do
       let(:user) { FactoryGirl.create(:user) }
       before do
         sign_in user
@@ -62,5 +91,110 @@ RSpec.describe "Static Pages", type: :feature do
 
     it { should have_title(full_title('Contact')) }
   end
+  
+  
+  describe "Superuser test page" do 
+    
+    describe "when not logged in" do
+      before { visit superuseronlypage_path }
+      it { should have_title(full_title('Home')) }
+      it { should have_content('Sign In') }
+      it { should have_content('Register') }
+    end
+    
+    describe "when logged in as user" do
+      let(:user) { FactoryGirl.create(:user) }
+ 
+      before do
+        sign_in user
+        visit superuseronlypage_path
+      end
+      
+      it { should have_title(full_title('Home')) }
+      it { should have_content('You are not authorized to access this page.') }
+      it { should_not have_content('Sign In') }
+      it { should_not have_content('Register') }
+    end
+
+    describe "when logged in as superuser" do
+      let(:superuser) { FactoryGirl.create(:superuser) }
+ 
+      before do
+        sign_in superuser
+        visit superuseronlypage_path
+      end
+      
+      it { should have_content('Sign Out, '+ superuser.firstname.capitalize) }
+      it { should_not have_content('Sign In') }
+      it { should have_title(full_title('Home')) }
+    end
+
+    describe "when logged in as admin" do
+      let(:admin) { FactoryGirl.create(:admin) }
+ 
+      before do
+        sign_in admin
+        visit superuseronlypage_path
+      end
+      
+      it { should have_content('Sign Out, '+ admin.firstname.capitalize) }
+      it { should_not have_content('Sign In') }
+      it { should have_title(full_title('Superuser')) }
+    end
+    
+  end
+  
+  
+ describe "Admin test page" do 
+    
+    describe "when not logged in" do
+      before { visit adminonlypage_path }
+      it { should have_title(full_title('Home')) }
+      it { should have_content('Sign In') }
+      it { should have_content('Register') }
+    end
+    
+    describe "when logged in as user" do
+      let(:user) { FactoryGirl.create(:user) }
+ 
+      before do
+        sign_in user
+        visit adminonlypage_path
+      end
+      
+      it { should have_title(full_title('Home')) }
+      it { should have_content('You are not authorized to access this page.') }
+      it { should_not have_content('Sign In') }
+      it { should_not have_content('Register') }
+    end
+
+    describe "when logged in as superuser" do
+      let(:superuser) { FactoryGirl.create(:superuser) }
+ 
+      before do
+        sign_in superuser
+        visit adminonlypage_path
+      end
+      
+      it { should have_title(full_title('Home')) }
+      it { should have_content('You are not authorized to access this page.') }
+      it { should_not have_content('Sign In') }
+      it { should_not have_content('Register') }
+    end
+
+    describe "when logged in as admin" do
+      let(:admin) { FactoryGirl.create(:admin) }
+ 
+      before do
+        sign_in admin
+        visit adminonlypage_path
+      end
+      
+      it { should have_content('Sign Out, '+ admin.firstname.capitalize) }
+      it { should_not have_content('Sign In') }
+      it { should have_title(full_title('Admin')) }
+    end
+    
+  end  
   
 end

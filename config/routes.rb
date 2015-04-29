@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get 'help'    => 'static_pages#help'
   get 'about'   => 'static_pages#about'
   get 'contact' => 'static_pages#contact'
+  get 'useronlypage' => 'static_pages#useronlypage'
+  get 'superuseronlypage' => 'static_pages#superuseronlypage'
+  get 'adminonlypage' => 'static_pages#adminonlypage'
   
   resources :users
 
