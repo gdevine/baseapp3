@@ -32,7 +32,7 @@ form do |f|
     f.input :surname               
     f.input :email    
     f.input :approved 
-    f.input :role   
+    f.collection_select :role, User::roles, :to_s, :humanize
   end
   f.actions
 end

@@ -20,6 +20,7 @@ class Ability
       # can :crud, Species
     end
     
+    # if user.role == "admin" && user.approved == true      
     if user.role == "admin" && user.approved == true      
       can [:manage], StaticPagesController
       # can :crud, Species

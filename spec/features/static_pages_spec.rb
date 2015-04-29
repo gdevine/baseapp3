@@ -195,6 +195,22 @@ RSpec.describe "Static Pages", type: :feature do
       it { should have_title(full_title('Admin')) }
     end
     
+    describe "when logged in as an unapproved user" do
+      let(:admin) { FactoryGirl.create(:admin) }
+ 
+      before do
+        admin.approved = false
+        admin.save
+        sign_in admin
+        visit adminonlypage_path
+      end
+      
+      it { should_not have_content('Sign Out, '+ admin.firstname.capitalize) }
+      it { should have_content('Sign In') }
+      it { should have_content('You are not authorized to access this page.') }
+      it { should_not have_title(full_title('Admin')) }
+    end
+    
   end  
   
 end

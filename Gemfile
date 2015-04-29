@@ -21,11 +21,11 @@ gem 'bootstrap-sass',          '3.2.0.0'
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
 gem 'cancancan', '~> 1.10'
+gem 'factory_girl_rails'
 
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
-  gem 'factory_girl_rails'
   gem 'capybara'     
   gem 'database_cleaner'
   gem 'byebug',      '3.4.0'

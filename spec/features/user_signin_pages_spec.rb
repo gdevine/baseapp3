@@ -38,7 +38,7 @@ RSpec.describe "Users", type: :feature do
         fill_in "Password",     with: unapproved_user.password
         click_button submit
       end   
-      it { should have_content('Your account has not been approved by your administrator yet') }
+      it { should have_content('This account is currently unapproved') }
       it { should have_content('Sign In') }
       it { should_not have_content('Sign Out') }
     end    
