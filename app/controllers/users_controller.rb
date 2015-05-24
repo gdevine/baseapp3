@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
+
   before_action :authenticate_user!
+  load_and_authorize_resource
   
   def index   
-    @users = User.paginate(page: params[:page])
+  end
+
+  def show
   end
   
-  def show
-    @user = User.find(params[:id])
-  end
 end

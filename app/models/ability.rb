@@ -20,23 +20,10 @@ class Ability
       # can :crud, Species
     end
     
-    # if user.role == "admin" && user.approved == true      
     if user.role == "admin" && user.approved == true      
       can [:manage], StaticPagesController
-      # can :crud, Species
+      can :crud, User
     end
         
-    # if user.role == "technician" && user.approved == true
-      # can [:edit, :update], JobRequest do |job_request|
-        # job_request.analysis_type.technicians.include? user
-      # end
-    # end
-#     
-    # if user.role == "researcher" && user.approved == true
-      # can [:edit, :update, :destroy], JobRequest do |job_request|
-        # job_request.researcher_id == user.id
-      # end
-    # end
-    
   end
 end

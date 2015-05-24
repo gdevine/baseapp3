@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   end
   
   def fullname
-    self.firstname << " " << self.surname
+    self.firstname + " " + self.surname
   end
   
   

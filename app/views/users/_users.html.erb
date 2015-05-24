@@ -1,0 +1,19 @@
+<% if @users.any? %>
+  <table class="table table-bordered table-striped table-hover" id="users">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>View?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'users/users_table', collection: @users, as: :user %>
+    </tbody>
+  </table>
+  
+<% else %>
+  <p>No Users found</p>
+<% end %>
