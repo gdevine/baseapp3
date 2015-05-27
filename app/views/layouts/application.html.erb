@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  <head>    
+  	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Base application" />
     <title><%= full_title(yield(:title)) %></title>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Instrument tracker at Hawkesbury Institute for the Environment" />
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
   </head>
@@ -13,9 +15,10 @@
     <%= render 'layouts/header' %>
     <div class="container">      
       
-      <%# if user_signed_in? %>
-        <%# render 'layouts/minibar' %>
-      <%# end %>
+      <% if user_signed_in? %>
+        <%= render 'layouts/minibar' %>
+      <% end %>
+      
       <div class="row">
         <div class="col-xs-offset-3 col-xs-6">
 		      <% flash.each do |key, value| %>

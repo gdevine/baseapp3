@@ -1,0 +1,27 @@
+<% provide(:title, 'Edit User') %>
+<% provide(:pageheading, 'Edit User '+@user.fullname) %>
+
+<%= form_for @user, :html => {:class => "form-horizontal topspace50"} do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  		
+  <div class="form-group">
+    <%= f.label :role, "Role", :class => "col-md-2 col-md-offset-1 control-label" %>
+    <div class="col-md-6">
+      <%= f.select(:role, User.roles, {:include_blank => false}, {:class => "form-control", :id=>'role'}) %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :approved, "Approved?", :class => "col-md-2 col-md-offset-1 control-label" %>
+    <div class="col-md-1">
+      <%= f.check_box :approved, :class => "form-control", :id=>'approved' %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-md-4 col-md-offset-4 topspace50 bottomspace">
+      <%= f.submit "Update", :class => "btn btn-large btn-primary" %>
+    </div>
+  </div>
+  
+<% end %>

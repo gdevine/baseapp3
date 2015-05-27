@@ -13,10 +13,10 @@ class User < ActiveRecord::Base
     ['user', 'superuser', 'admin']
   end
          
-  validates :firstname, presence: true, length: { maximum: 30 }
-  validates :surname, presence: true, length: { maximum: 30 }
+  validates :firstname, :presence => { :message => "You must give a First Name" }, length: { maximum: 30 }
+  validates :surname, :presence => { :message => "You must give a Surname" }, length: { maximum: 30 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 80 },
+  validates :email, :presence => { :message => "An account with this email already exists" }, length: { maximum: 80 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   

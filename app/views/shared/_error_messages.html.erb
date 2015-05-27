@@ -1,0 +1,17 @@
+<% if object.errors.any? %>
+  <div class="row topspace20">
+    <div class="col-md-offset-2 col-md-8">
+
+			<div class="alert alert-dismissable alert-danger">
+			  <strong>The form contains <%= pluralize(object.errors.count, "error") %>.</strong> 
+			  <ul>
+			    <% object.errors.messages.values.each do |msg| %>
+		        <% msg.each do |m| %>
+		          <li><%= m %></li>
+		        <% end %>
+		      <% end %>
+			  </ul>
+			</div>
+    </div>
+  </div>
+<% end %>

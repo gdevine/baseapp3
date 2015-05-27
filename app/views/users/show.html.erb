@@ -3,19 +3,21 @@
 
 
 <!-- Add edit/delete buttons if authorized -->
-<% if can? :crud, @user %>
-	<div class="row bottomspace">  
-	  <div class="col-xs-12 col-sm-2 col-sm-push-10">
-			<a class="btn btn-block btn-info" data-toggle="dropdown" href="#" id="options_button">
-			  Options
-			  <span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-			  <li><%= link_to "Edit User", edit_user_path(id:@user.id) %> </li>
-			  <li><%= link_to "Delete User", @user, :method => :delete, data: { confirm: "Are you sure?" }, :class=>"redtext" %></li>
-		  </ul>
+<% if can? :edit, @user %>
+	<% if @user != current_user %>
+		<div class="row bottomspace">  
+		  <div class="col-xs-12 col-sm-2 col-sm-push-10">
+				<a class="btn btn-block btn-info" data-toggle="dropdown" href="#" id="options_button">
+				  Options
+				  <span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+				  <li><%= link_to "Edit User", edit_user_path(id:@user.id) %> </li>
+				  <li><%= link_to "Delete User", @user, :method => :delete, data: { confirm: "Are you sure?" }, :class=>"redtext" %></li>
+			  </ul>
+			</div>
 		</div>
-	</div>
+  <% end %>
 <% end %>
 
 

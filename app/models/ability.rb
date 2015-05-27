@@ -12,17 +12,19 @@ class Ability
     
     if user.role == "user" && user.approved == true
       can [:home, :about, :contact, :help, :useronlypage], StaticPagesController
-      # can [:index, :show], Species
     end    
     
     if user.role == "superuser" && user.approved == true      
       can [:home, :about, :contact, :help, :useronlypage], StaticPagesController
-      # can :crud, Species
     end
     
     if user.role == "admin" && user.approved == true      
       can [:manage], StaticPagesController
-      can :crud, User
+      can [:index, :show], User
+      
+      can [:edit, :update, :destroy], User do |u|
+        u.id != user.id 
+      end
     end
         
   end
