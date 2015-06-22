@@ -14,18 +14,9 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_deliveries = false
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => "587",
-    :domain               => "baseapp3.com",
-    :user_name            => "hiedatamanager",
-    :password             => "DM_Hawkesbury1",
-    :authentication       => "plain",
-    :enable_starttls_auto => true
-  }
+  config.action_mailer.delivery_method = :test 
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -45,14 +36,34 @@ Rails.application.configure do
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
-  config.assets.raise_runtime_errors = true
+  config.assets.raise_runtime_errors = false
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   
   # Devise
-  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
   # Default Mailer Host
   # Rails.application.routes.default_url_options[:host] = 'domain.com'
+  
+  # Initialising Bullet settings
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.growl = false
+    # Bullet.xmpp = { :account  => 'bullets_account@jabber.org',
+                    # :password => 'bullets_password_for_jabber',
+                    # :receiver => 'your_account@jabber.org',
+                    # :show_online_status => true }
+    Bullet.rails_logger = true
+    # Bullet.honeybadger = false
+    # Bullet.bugsnag = false
+    # Bullet.airbrake = false
+    # Bullet.rollbar = false
+    Bullet.add_footer = true
+    Bullet.stacktrace_includes = [ 'your_gem', 'your_middleware' ]
+    # Bullet.slack = { webhook_url: 'http://some.slack.url', foo: 'bar' }
+  end  
 end

@@ -7,6 +7,7 @@ gem 'uglifier',             '2.5.3'
 gem 'coffee-rails',         '4.1.0'
 gem 'jquery-rails',         '4.0.0.beta2'
 gem 'turbolinks',           '2.3.0'
+gem 'jquery-turbolinks'
 gem 'jbuilder',             '2.2.3'
 gem 'sdoc',                 '0.4.0', group: :doc
 gem 'pg'
@@ -25,6 +26,13 @@ gem 'factory_girl_rails'
 gem 'respond-js-rails'
 gem "rails_config"
 gem 'jquery-datatables-rails', '~> 3.3.0'
+gem 'mandrill-api', require: "mandrill"
+gem 'rack-mini-profiler'
+# gem 'rails-api'
+
+group :development do
+  gem 'bullet'
+end
 
 
 group :development, :test do
@@ -35,6 +43,7 @@ group :development, :test do
   gem 'web-console', '2.0.0.beta3'
   gem 'spring',      '1.1.3'
 end
+
 
 group :test do
   gem 'minitest-reporters', '1.0.5'

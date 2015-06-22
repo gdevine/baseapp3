@@ -5,8 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
   before_save { self.email = email.downcase }
-  
-  after_create :send_admin_mail, :send_welcome_mail
+  after_create :send_welcome_mail, :send_admin_mail
   
   # Set out different user roles available
   def self.roles
@@ -43,15 +42,17 @@ class User < ActiveRecord::Base
   end
   
   def send_admin_mail
-    UserMailer.new_user_waiting_for_approval(self).deliver_now
+    AdminMailer.new_user_waiting_for_approval(self).deliver_now
+    # AdminMailer.new_user_waiting_for_approval(self)
   end
   
   def send_welcome_mail
     UserMailer.welcome_email(self).deliver_now
+    # UserMailer.welcome_email(self)
   end
   
   def fullname
-    self.firstname + " " + self.surname
+    self.firstname.capitalize + " " + self.surname.capitalize
   end
   
   

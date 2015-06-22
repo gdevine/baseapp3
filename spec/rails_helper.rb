@@ -4,6 +4,7 @@ require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
+require 'database_cleaner'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -52,25 +53,11 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
   
-  # DatabaseCleaner
-  config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
+  #Turn off emails being sent in rspec testing via the mandrill api
+  config.before(:all) do 
+    Excon.defaults[:mock] = true
+    Excon.stub({}, {body: '{}', status: 200}) # stubs any request to return an empty JSON string
   end
-
-  config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
-  end
-
-  config.before(:each, :js => true) do
-    DatabaseCleaner.strategy = :truncation
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
+  
   
 end

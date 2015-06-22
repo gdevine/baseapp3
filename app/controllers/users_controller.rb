@@ -21,7 +21,12 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-
+    
+  def destroy
+    @user.destroy
+    flash[:link] = "User Deleted!"
+    redirect_to users_path
+  end
   
   private
     def user_params

@@ -1,4 +1,6 @@
 site_title: Base App 3
+site_url: www.baseapp3.com
+site_appname: baseapp3
 
-default_approved : true
+# default_approved : true
 
